@@ -1,0 +1,39 @@
+.app {
+  -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 2s; /* Safari 4.0 - 8.0 */
+  animation-name: example;
+  animation-duration: 2s;
+  animation-iteration-count:infinite;
+  -webkit-animation-iteration-count: infinite; /* Safari 4.0 - 8.0 */
+  animation-direction: alternate;
+  -webkit-animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-timing-function: ease-in-out;
+  text-align: -webkit-center;
+  vertical-align: middle;
+  line-height: 100px;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 40%;
+}
+
+.heading {
+  font-size: 26px;
+  text-align: center;
+  margin-top: 10%;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes example {
+    0% {color: #7F2767; font-size: 0px;}
+    50% {color: #7447C1; font-size: 200px;}
+    100% {color: #3AAB24; font-size: 0px;}
+}
+
+/* Standard syntax */
+@keyframes example {
+    0% {color: #7F2767; font-size: 0px;}
+    50% {color: #7447C1; font-size: 200px;}
+    100% {color: #3AAB24; font-size: 0px;}
+}

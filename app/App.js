@@ -6,45 +6,58 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       random_numbers: [],
-      current_idx: 0,
-      max_count: 5000
+      max_count: 5000,
+      display_value: null
     };
-    this.setCurrentIdx = this.setCurrentIdx.bind(this);
+    this.findRandomNumber = this.findRandomNumber.bind(this);
   }
 
   componentWillMount() {
-    let ar = [];
-    for (let i = 0; i < this.state.max_count; i++) {
-      ar[i] = i + 1;
+    this.initializeList();
+    setInterval(this.findRandomNumber, 2000);
+  }
+
+  findRandomNumber() {
+    if (!this.state.random_numbers.length) {
+      this.initializeList();
+    } else {
+      let idx = Math.floor(Math.random() * this.state.random_numbers.length);
+      this.setState({
+        display_value: this.state.random_numbers[idx]
+      }, () => {
+        let random_numbers = this.state.random_numbers;
+        random_numbers.splice(idx, 1);
+        this.setState({
+          random_numbers: random_numbers
+        });
+      })
     }
+  }
 
-    // randomize the array
-    ar.sort(function () {
-        return Math.random() - 0.5;
-    });
-
+  initializeList() {
+    let initialDisplayValue = Math.floor(Math.random() * this.state.max_count) + 1;
     this.setState({
-      random_numbers: ar
+      display_value: initialDisplayValue
     });
-  }
-
-  componentDidMount() {
-    setInterval(this.setCurrentIdx, 2000);
-  }
-
-  setCurrentIdx() {
-    let current_idx = this.state.current_idx + 1 < this.state.max_count ? this.state.current_idx + 1 : 0;
+    let random_numbers = [];
+    for (let i = 0; i < this.state.max_count; i++) {
+      if (i === initialDisplayValue - 1) {
+        continue;
+      }
+      random_numbers.push(i+1);
+    }
     this.setState({
-      current_idx: current_idx
-    });
+      random_numbers: random_numbers
+    })
   }
+
 
   render() {
     return (
       <div className={styles.heading}>
         <div>Can you guess the next number in the series ??</div>
         <div className={styles.app}>
-         { this.state.random_numbers[this.state.current_idx] }
+         { this.state.display_value }
         </div>
       </div>
     );

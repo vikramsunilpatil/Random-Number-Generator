@@ -7,7 +7,7 @@ export default class App extends React.Component {
     this.state = {
       random_numbers: [],
       current_idx: 0,
-      max_count: 20
+      max_count: 5000
     };
     this.setCurrentIdx = this.setCurrentIdx.bind(this);
   }
